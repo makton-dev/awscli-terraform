@@ -5,7 +5,7 @@ LABEL "repo"="https://github.com/makton-dev/awscli-terraform"
 LABEL "homepage"="https://github.com/makton-dev/awscli-terraform"
 
 # Installed dependent packages
-RUN apt-get update && apt-get -y install unzip wget curl gnupg
+RUN apt-get update && apt-get -y install unzip wget curl gnupg apt-utils
 
 # Add terraform repo
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
