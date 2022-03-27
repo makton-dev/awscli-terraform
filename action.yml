@@ -1,0 +1,9 @@
+name: 'awscli-terraform'
+description: 'Independent Terraform/AWS cli Github Action'
+author: 'Mike Schneider'
+branding:
+  icon: 'play'
+  color: 'red'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
