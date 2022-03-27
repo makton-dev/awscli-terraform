@@ -20,4 +20,5 @@ RUN unzip awscli-exe-linux-x86_64.zip
 RUN bash ./aws/install
 
 ADD entry.sh /entry.sh
+RUN chmod 777 /entry.sh
 ENTRYPOINT ["/entry.sh"]
