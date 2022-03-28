@@ -1,14 +1,21 @@
 #!/bin/bash
 set -eo pipefail
 
-echo "${AWS_DEFAULT_REGION} - ${AWS_ACCESS_KEY_ID} - ${AWS_SECRET_ACCESS_KEY}"
 # Initialize Terraform
 terraform init
 
-# Validate Terraform plan
-terraform plan
+# Execute Terraform plan
+if [ "${ACTION}" -eq "plan" ]; then
+   terraform plan
+fi
 
 # Execute Terraform apply
-# if [ "${apply}" == "true" ]; then
-#   terraform apply aws.tfplan
-# fi
+if [ "${ACTION}" -eq "apply" ]; then
+   terraform plan -out aws.tfplan
+   terraform apply aws.tfplan
+fi
+
+# Execute Terraform apply
+if [ "${ACTION}" -eq "destroy" ]; then
+   terraform destroy -auto-approve
+fi
