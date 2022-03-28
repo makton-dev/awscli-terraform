@@ -2,20 +2,30 @@
 set -eo pipefail
 
 # Initialize Terraform
+echo "Initializing Terraform"
 terraform init
 
 # Execute Terraform plan
-if [ "${ACTION}" -eq "plan" ]; then
+echo "Checking Terraform Plan"
+if [ "${ACTION}" == "plan" ]
+then
    terraform plan
-fi
 
 # Execute Terraform apply
-if [ "${ACTION}" -eq "apply" ]; then
+elif [ "${ACTION}" == "apply" ]
+then
+   echo "Creating Terraform Plan"
    terraform plan -out aws.tfplan
+   echo "Applying Terraform Plan"
    terraform apply aws.tfplan
-fi
 
 # Execute Terraform apply
-if [ "${ACTION}" -eq "destroy" ]; then
+elif [ "${ACTION}" == "destroy" ]
+then
+   echo "Destroying infrastructure based on Terraform config. cannot undo!!!!"
    terraform destroy -auto-approve
+
+# Looks like no valid action was provided
+else
+  echo "Please provide a proper action (plan, apply, destroy)"
 fi
